@@ -1,0 +1,20 @@
+# IDEA files
+/.idea
+
+# pytest cache files
+**/.pytest_cache
+**/__pycache__
+
+# Virtual Environment Info
+/venv
+
+
+# Package Files
+*.jar
+*.zip
+*.tar.gz
+*.rar
+*.war
+*.json
+*.js
+*.md
