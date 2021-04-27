@@ -6,8 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 @pytest.mark.usefixtures('setUp')
 class BasePage(object):
-    time_to_wait = 150
-    sync_timeout = 30
+    time_to_wait = 5
 
     def __init__(self, setUp):
         self.driver = setUp
@@ -20,8 +19,20 @@ class BasePage(object):
         input_field.click()
         input_field.send_keys(value)
 
-    def select_button(self, locator):
-        element = self.driver.find_element(locator)
+    def click_button(self, locator):
+        WebDriverWait(self.driver, self.time_to_wait).until(
+            expected_conditions.visibility_of_element_located(locator)
+        )
+        element = self.driver.find_element(*locator)
         element.click()
 
-
+    def check_element_visibility(self, element):
+        item = self.CHECK[element]
+        WebDriverWait(self.driver, self.time_to_wait).until(
+            expected_conditions.visibility_of_element_located(item)
+        )
+        try:
+            self.driver.find_element(*item)
+            return True
+        except NoSuchElementException:
+            return False
