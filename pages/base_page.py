@@ -11,19 +11,19 @@ class BasePage(object):
     def __init__(self, setUp):
         self.driver = setUp
 
-    def complete_field(self, locator, value):
+    def complete_field(self, selector, value):
         WebDriverWait(self.driver, self.time_to_wait).until(
-            expected_conditions.element_to_be_clickable(locator)
+            expected_conditions.element_to_be_clickable(selector)
         )
-        input_field = self.driver.find_element(*locator)
+        input_field = self.driver.find_element(*selector)
         input_field.click()
         input_field.send_keys(value)
 
-    def click_button(self, locator):
+    def click_button(self, selector):
         WebDriverWait(self.driver, self.time_to_wait).until(
-            expected_conditions.visibility_of_element_located(locator)
+            expected_conditions.visibility_of_element_located(selector)
         )
-        element = self.driver.find_element(*locator)
+        element = self.driver.find_element(*selector)
         element.click()
 
     def check_element_visibility(self, element):
